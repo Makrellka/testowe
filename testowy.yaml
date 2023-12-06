@@ -17,35 +17,35 @@ spec:
   postCommit:
     script: |
       curl -o /tmp/twoja-aplikacja.jar https://nexus.inwebit.pl/repository/maven-releases/pl/tauron/vpp/central/vpp-calculations/4/vpp-calculations-4.jar
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: twoja-aplikacja-deployment
-  namespace: vpp-central-services
-spec:
-  replicas: 1
-  selector:
-    app: twoja-aplikacja
-  template:
-    metadata:
-      labels:
-        app: twoja-aplikacja
-    spec:
-      containers:
-        - name: twoja-aplikacja
-          image: 'twoja-aplikacja:latest'
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: app-volume
-              mountPath: /app
-  triggers:
-    - type: ConfigChange
-  volumes:
-    - name: app-volume
-      emptyDir: {}
----
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: twoja-aplikacja-deployment
+#  namespace: vpp-central-services
+#spec:
+#  replicas: 1
+#  selector:
+#    app: twoja-aplikacja
+#  template:
+#    metadata:
+#      labels:
+#        app: twoja-aplikacja
+#    spec:
+#      containers:
+#        - name: twoja-aplikacja
+#          image: 'twoja-aplikacja:latest'
+#          ports:
+#            - containerPort: 8080
+#          volumeMounts:
+#            - name: app-volume
+#              mountPath: /app
+#  triggers:
+#    - type: ConfigChange
+#  volumes:
+#    - name: app-volume
+#      emptyDir: {}
+#---
 #apiVersion: build.openshift.io/v1
 #kind: Service
 #metadata:
