@@ -18,7 +18,7 @@ spec:
     script: |
       curl -o /tmp/twoja-aplikacja.jar https://nexus.inwebit.pl/repository/maven-releases/pl/tauron/vpp/central/vpp-calculations/4/vpp-calculations-4.jar
 ---
-apiVersion: build.openshift.io/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: twoja-aplikacja-deployment
@@ -46,15 +46,15 @@ spec:
     - name: app-volume
       emptyDir: {}
 ---
-apiVersion: build.openshift.io/v1
-kind: Service
-metadata:
-  name: twoja-aplikacja-service
-  namespace: vpp-central-services
-spec:
-  selector:
-    app: twoja-aplikacja
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+#apiVersion: build.openshift.io/v1
+#kind: Service
+#metadata:
+#  name: twoja-aplikacja-service
+#  namespace: vpp-central-services
+#spec:
+#  selector:
+#    app: twoja-aplikacja
+#  ports:
+#    - protocol: TCP
+#      port: 8080
+#      targetPort: 8080
