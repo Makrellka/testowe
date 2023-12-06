@@ -17,3 +17,38 @@ spec:
   postCommit:
     script: |
       curl -o /tmp/twoja-aplikacja.jar https://nexus.inwebit.pl/repository/maven-releases/pl/tauron/vpp/central/vpp-calculations/4/vpp-calculations-4.jar
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: twoja-aplikacja-deployment
+  namespace: vpp-central-services
+spec:
+  replicas: 1
+  selector:
+    app: twoja-aplikacja
+  template:
+    metadata:
+      labels:
+        app: twoja-aplikacja
+    spec:
+      containers:
+        - name: twoja-aplikacja
+          image: 'twoja-aplikacja:latest'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: twoja-aplikacja-service
+  namespace: vpp-central-services
+spec:
+  selector:
+    app: twoja-aplikacja
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
