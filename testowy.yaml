@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: twoja-aplikacja-build
+spec:
+  strategy:
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
+    type: Source
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'twoja-aplikacja:latest'
+  postCommit:
+    script: |
+      curl -o /app/java.jar https://nexus.inwebit.pl/repository/maven-releases/pl/tauron/vpp/central/vpp-calculations/4/vpp-calculations-4.jar
+---
+apiVersion: apps/v1
+kind: DeploymentConfig
+metadata:
+  name: twoja-aplikacja-deployment
+spec:
+  replicas: 1
+  selector:
+    app: twoja-aplikacja
+  template:
+    metadata:
+      labels:
+        app: twoja-aplikacja
+    spec:
+      containers:
+        - name: twoja-aplikacja
+          image: 'twoja-aplikacja:latest'
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
+  triggers:
+    - type: ConfigChange
+  volumes:
+    - name: app-volume
+      emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: twoja-aplikacja-service
+spec:
+  selector:
+    app: twoja-aplikacja
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
