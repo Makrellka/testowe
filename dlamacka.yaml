@@ -5,7 +5,7 @@ metadata:
     jarFileName: vpp-calculations.jar
     openshift.io/generated-by: OpenShiftWebConsole
   name: vpp-calculations
-  namespace: vpp-central-services
+  namespace: vpp-central-system
   labels:
     app: vpp-calculations
     app.kubernetes.io/component: vpp-calculations
