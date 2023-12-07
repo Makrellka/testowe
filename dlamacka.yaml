@@ -1,0 +1,90 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    jarFileName: vpp-calculations-6.jar
+    openshift.io/generated-by: OpenShiftWebConsole
+  resourceVersion: ‘1655531’
+  name: vpp-calculations-6
+  uid: b55fc6d2-204b-439b-872f-c88cc5c53902
+  creationTimestamp: ‘2023-12-07T09:04:51Z’
+  generation: 3
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: ‘2023-12-07T09:04:51Z’
+      fieldsType: FieldsV1
+      fieldsV1:
+        ‘f:metadata’:
+          ‘f:annotations’:
+            .: {}
+            ‘f:jarFileName’: {}
+            ‘f:openshift.io/generated-by’: {}
+          ‘f:labels’:
+            .: {}
+            ‘f:app’: {}
+            ‘f:app.kubernetes.io/component’: {}
+            ‘f:app.kubernetes.io/instance’: {}
+            ‘f:app.kubernetes.io/name’: {}
+            ‘f:app.kubernetes.io/part-of’: {}
+            ‘f:app.openshift.io/runtime’: {}
+            ‘f:app.openshift.io/runtime-version’: {}
+        ‘f:spec’:
+          ‘f:output’:
+            ‘f:to’: {}
+          ‘f:runPolicy’: {}
+          ‘f:source’:
+            ‘f:binary’: {}
+            ‘f:type’: {}
+          ‘f:strategy’:
+            ‘f:sourceStrategy’:
+              .: {}
+              ‘f:from’: {}
+            ‘f:type’: {}
+          ‘f:triggers’: {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: ‘2023-12-07T09:12:09Z’
+      fieldsType: FieldsV1
+      fieldsV1:
+        ‘f:status’:
+          ‘f:lastVersion’: {}
+  namespace: vpp-central-services
+  labels:
+    app: vpp-calculations-6
+    app.kubernetes.io/component: vpp-calculations-6
+    app.kubernetes.io/instance: vpp-calculations-6
+    app.kubernetes.io/name: vpp-calculations-6
+    app.kubernetes.io/part-of: vpp-services-2-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: ‘vpp-calculations-6:latest’
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: ‘java:openjdk-8-el7’
+  postCommit: {}
+  source:
+    type: Binary
+    binary: {}
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: vpp-calculations-6-generic-webhook-secret
+  runPolicy: Serial
+status:
+  lastVersion: 2
