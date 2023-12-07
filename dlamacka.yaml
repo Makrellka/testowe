@@ -86,5 +86,3 @@ spec:
         secretReference:
           name: vpp-calculations-6-generic-webhook-secret
   runPolicy: Serial
-status:
-  lastVersion: 2
