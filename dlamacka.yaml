@@ -2,16 +2,16 @@ kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
   annotations:
-    jarFileName: vpp-calculations-6.jar
+    jarFileName: vpp-calculations.jar
     openshift.io/generated-by: OpenShiftWebConsole
-  name: vpp-calculations-6
+  name: vpp-calculations
   namespace: vpp-central-services
   labels:
-    app: vpp-calculations-6
-    app.kubernetes.io/component: vpp-calculations-6
-    app.kubernetes.io/instance: vpp-calculations-6
-    app.kubernetes.io/name: vpp-calculations-6
-    app.kubernetes.io/part-of: vpp-services-2-app
+    app: vpp-calculations
+    app.kubernetes.io/component: vpp-calculations
+    app.kubernetes.io/instance: vpp-calculations
+    app.kubernetes.io/name: vpp-calculations
+    app.kubernetes.io/part-of: vpp-central-system-app
     app.openshift.io/runtime: java
     app.openshift.io/runtime-version: openjdk-8-el7
 spec:
@@ -19,7 +19,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: "vpp-calculations-6:latest"
+      name: "vpp-calculations:latest"
   resources: {}
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
@@ -38,5 +38,5 @@ spec:
     - type: Generic
       generic:
         secretReference:
-          name: vpp-calculations-6-generic-webhook-secret
+          name: vpp-calculations-generic-webhook-secret
   runPolicy: Serial
