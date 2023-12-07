@@ -5,11 +5,13 @@ metadata:
   namespace: vpp-central-services
 spec:
   strategy:
-    sourceStrategy:
+    type: Docker
+    dockerStrategy:
       from:
-        kind: DockerImage
-        name: registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
-    type: Source
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java-21:1.17-2'
+      dockerfilePath: Dockerfile
   output:
     to:
       kind: ImageStreamTag
